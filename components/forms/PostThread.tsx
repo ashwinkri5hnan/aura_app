@@ -1,42 +1,36 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import * as z from "zod";
+import { useForm } from "react-hook-form";
+import { useOrganization } from "@clerk/nextjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter } from "next/navigation";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { usePathname, useRouter } from "next/navigation";
+
+import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
 
-// import { updateUser } from "@/lib/actions/user.actions";
-import { ThreadValidation } from "@/lib/validations/thread";
-
 interface Props {
-  user: {
-    id: string;
-    objectId: string;
-    username: string;
-    name: string;
-    bio: string;
-    image: string;
-  };
-  btnTitle: string;
+  userId: string;
 }
 
-function PostThread({ userId }: { userId: string }) {
+function PostThread({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const form = useForm({
+  const { organization } = useOrganization();
+
+  const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: "",
@@ -48,7 +42,7 @@ function PostThread({ userId }: { userId: string }) {
     await createThread({
       text: values.thread,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
 
@@ -77,8 +71,8 @@ function PostThread({ userId }: { userId: string }) {
           )}
         />
 
-        <Button type="submit" className="bg-emerald-600">
-          Post flex
+        <Button type="submit" className="bg-primary-500">
+          Post Thread
         </Button>
       </form>
     </Form>

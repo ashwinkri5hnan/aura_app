@@ -27,7 +27,7 @@
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.0",
     "mongose": "^0.0.2-security",
-    "next": "^13.5.4",
+    "next": "^13.4.19",
     "postcss": "8.4.30",
     "react": "18.2.0",
     "react-dom": "18.2.0",
