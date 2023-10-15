@@ -4,6 +4,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
+  // next.config.js
+
   experimental: {
     serverActions: true,
     serverComponentsExternalPackages: ["mongoose"],
@@ -14,6 +16,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: ["utfs.io"],
     remotePatterns: [
       {
         protocol: "https",

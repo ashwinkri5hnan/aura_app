@@ -41,3 +41,75 @@ export function formatThreadCount(count: number): string {
     return `${threadCount} ${threadWord}`;
   }
 }
+
+export function formatDateWithMeasure(dateString: string): string {
+  const currentDate = new Date();
+  const inputDate = new Date(dateString);
+
+  const elapsedMilliseconds = currentDate.getTime() - inputDate.getTime();
+  const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+  const elapsedMinutes = Math.floor(elapsedSeconds / 60);
+  const elapsedHours = Math.floor(elapsedMinutes / 60);
+  const elapsedDays = Math.floor(elapsedHours / 24);
+  const elapsedWeeks = Math.floor(elapsedDays / 7);
+  const elapsedMonths = Math.floor(elapsedDays / 30); // Approximation
+  const elapsedYears = Math.floor(elapsedDays / 365); // Approximation
+
+  if (elapsedSeconds < 60) {
+    return `${elapsedSeconds} seconds ago`;
+  } else if (elapsedMinutes < 60) {
+    return `${elapsedMinutes} minutes ago`;
+  } else if (elapsedHours < 24) {
+    return `${elapsedHours} hours ago`;
+  } else if (elapsedDays < 7) {
+    return `${elapsedDays} days ago`;
+  } else if (elapsedWeeks < 4) {
+    return `${elapsedWeeks} weeks ago`;
+  } else if (elapsedMonths < 12) {
+    return `${elapsedMonths} months ago`;
+  } else {
+    return `${elapsedYears} years ago`;
+  }
+}
+
+// export function formatDateWithMeasure(dateString: string): string {
+//   const currentDate = new Date();
+//   const inputDate = new Date(dateString);
+//   const elapsedMilliseconds = currentDate.getTime() - inputDate.getTime();
+
+//   const timeUnits = [
+//     { unit: 'second', duration: 1000 },
+//     { unit: 'minute', duration: 60 * 1000 },
+//     { unit: 'hour', duration: 60 * 60 * 1000 },
+//     { unit: 'day', duration: 24 * 60 * 60 * 1000 },
+//     { unit: 'week', duration: 7 * 24 * 60 * 60 * 1000 },
+//     { unit: 'month', duration: 30 * 24 * 60 * 60 * 1000 },
+//     { unit: 'year', duration: 365 * 24 * 60 * 60 * 1000 },
+//   ];
+
+//   for (const unit of timeUnits) {
+//     const elapsedUnit = elapsedMilliseconds / unit.duration;
+//     if (elapsedUnit < 1) {
+//       const roundedElapsed = Math.floor(elapsedUnit);
+//       return `${roundedElapsed} ${unit.unit}${roundedElapsed !== 1 ? 's' : ''} ago`;
+//     }
+//   }
+
+//   return 'a long time ago';
+// }
+
+export function truncateString(str: string, k: number): string {
+  if (k >= str.length) {
+    return str;
+  } else {
+    let truncated = str.substring(0, k);
+
+    // If the substring ends within a word, find the last space character
+    const lastSpaceIndex = truncated.lastIndexOf(" ");
+    if (lastSpaceIndex !== -1) {
+      truncated = truncated.substring(0, lastSpaceIndex);
+    }
+
+    return truncated + "...";
+  }
+}

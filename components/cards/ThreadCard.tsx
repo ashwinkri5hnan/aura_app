@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { formatDateString } from "@/lib/utils";
+import DeleteThread from "../forms/DeleteThread";
+import EditThread from "../atoms/EditThread";
+import ReactThread from "../atoms/ReactThread";
 
 interface Props {
   id: string;
@@ -24,7 +27,15 @@ interface Props {
       image: string;
     };
   }[];
+  reactions: {
+    image: string;
+    _id: string;
+    id: string;
+    name: string;
+    username: string;
+  }[];
   isComment?: boolean;
+  reactState?: boolean;
 }
 
 function ThreadCard({
@@ -36,7 +47,9 @@ function ThreadCard({
   community,
   createdAt,
   comments,
+  reactions,
   isComment,
+  reactState,
 }: Props) {
   return (
     <article
@@ -50,7 +63,7 @@ function ThreadCard({
             <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
               <Image
                 src={author.image}
-                alt="user_community_image"
+                alt="Profile image"
                 fill
                 className="cursor-pointer rounded-full"
               />
@@ -70,17 +83,17 @@ function ThreadCard({
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
-                <Image
-                  src="/assets/heart-gray.svg"
-                  alt="heart"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer object-contain"
+                <ReactThread
+                  threadId={id}
+                  currentUserId={currentUserId}
+                  interactState={reactState}
+                  parentId={parentId}
+                  isComment={isComment}
                 />
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"
-                    alt="heart"
+                    alt="reply"
                     width={24}
                     height={24}
                     className="cursor-pointer object-contain"
@@ -88,52 +101,125 @@ function ThreadCard({
                 </Link>
                 <Image
                   src="/assets/repost.svg"
-                  alt="heart"
+                  alt="repost"
                   width={24}
                   height={24}
                   className="cursor-pointer object-contain"
                 />
                 <Image
                   src="/assets/share.svg"
-                  alt="heart"
+                  alt="share"
                   width={24}
                   height={24}
                   className="cursor-pointer object-contain"
                 />
               </div>
 
-              {isComment && comments.length > 0 && (
-                <Link href={`/thread/${id}`}>
-                  <p className="mt-1 text-subtle-medium text-gray-1">
-                    {comments.length} repl{comments.length > 1 ? "ies" : "y"}
-                  </p>
-                </Link>
-              )}
+              <div className="flex flex-row gap-2">
+                {isComment && (
+                  <>
+                    {comments.length > 0 && (
+                      <Link href={`/thread/${id}`}>
+                        <p className="mt-1 text-subtle-medium text-gray-1">
+                          {comments.length}{" "}
+                          {comments.length > 1 ? "replies" : "reply"}
+                        </p>
+                      </Link>
+                    )}
+
+                    {comments.length > 0 && reactions.length > 0 && (
+                      <p className="mt-1 text-subtle-medium text-gray-1">•</p>
+                    )}
+
+                    {reactions.length > 0 && (
+                      <Link href={`/thread/reactions/${id}`}>
+                        <p className="mt-1 text-subtle-medium text-gray-1">
+                          {reactions.length}{" "}
+                          {reactions.length > 1 ? "likes" : "like"}
+                        </p>
+                      </Link>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
+
+        <div className="flex flex-row gap-2">
+          <DeleteThread
+            threadId={JSON.stringify(id)}
+            currentUserId={currentUserId}
+            authorId={author.id}
+            parentId={parentId}
+            isComment={isComment}
+          />
+          <EditThread
+            threadId={JSON.stringify(id)}
+            currentUserId={currentUserId}
+            authorId={author.id}
+          />
+        </div>
       </div>
 
-      {!isComment && comments.length > 0 && (
-        <div className="ml-1 mt-3 flex items-center gap-2">
-          {comments.slice(0, 2).map((comment, index) => (
-            <Image
-              key={index}
-              src={comment.author.image}
-              alt={`user_${index}`}
-              width={24}
-              height={24}
-              className={`${index !== 0 && "-ml-5"} rounded-full object-cover`}
-            />
-          ))}
+      <div className="flex flex-row gap-2">
+        {!isComment && (
+          <>
+            {comments.length > 0 && (
+              <div className="ml-1 mt-3 flex items-center gap-2">
+                {comments.slice(0, 2).map((comment, index) => (
+                  <Image
+                    key={index}
+                    src={comment.author.image}
+                    alt={`user_${index}`}
+                    width={24}
+                    height={24}
+                    className={`${
+                      index !== 0 && "-ml-5"
+                    } rounded-full object-cover`}
+                  />
+                ))}
 
-          <Link href={`/thread/${id}`}>
-            <p className="mt-1 text-subtle-medium text-gray-1">
-              {comments.length} repl{comments.length > 1 ? "ies" : "y"}
-            </p>
-          </Link>
-        </div>
-      )}
+                <Link href={`/thread/${id}`}>
+                  <p className="mt-1 text-subtle-medium text-gray-1">
+                    {comments.length}{" "}
+                    {comments.length > 1 ? "replies" : "reply"}
+                  </p>
+                </Link>
+              </div>
+            )}
+
+            {/* {comments.length > 0 && reactions.length > 0 && (
+              <div className="ml-1 mt-3 flex items-center">
+                <p className="mt-1 text-subtle-medium text-gray-1">•</p>
+              </div>
+            )} */}
+
+            {reactions.length > 0 && (
+              <div className="ml-1 mt-3 flex items-center gap-2">
+                {reactions.slice(0, 2).map((reaction, index) => (
+                  <Image
+                    key={index}
+                    src={reaction.image}
+                    alt={`user_${index}`}
+                    width={24}
+                    height={24}
+                    className={`${
+                      index !== 0 && "-ml-5"
+                    } rounded-full object-cover`}
+                  />
+                ))}
+
+                <Link href={`/thread/reactions/${id}`}>
+                  <p className="mt-1 text-subtle-medium text-gray-1">
+                    {reactions.length} {reactions.length > 1 ? "likes" : "like"}
+                  </p>
+                </Link>
+              </div>
+            )}
+          </>
+        )}
+      </div>
 
       {!isComment && community && (
         <Link

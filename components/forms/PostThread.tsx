@@ -18,13 +18,15 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 import { ThreadValidation } from "@/lib/validations/thread";
-import { createThread } from "@/lib/actions/thread.actions";
+import { createThread, editThread } from "@/lib/actions/thread.actions";
 
 interface Props {
   userId: string;
+  threadId?: string;
+  threadText?: string;
 }
 
-function PostThread({ userId }: Props) {
+function PostThread({ userId, threadId, threadText }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -33,18 +35,26 @@ function PostThread({ userId }: Props) {
   const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues: {
-      thread: "",
+      thread: threadText || "",
       accountId: userId,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: organization ? organization.id : null,
-      path: pathname,
-    });
+    if (threadId && threadText) {
+      await editThread({
+        threadId,
+        text: values.thread,
+        path: pathname,
+      });
+    } else {
+      await createThread({
+        text: values.thread,
+        author: userId,
+        communityId: organization ? organization.id : null,
+        path: pathname,
+      });
+    }
 
     router.push("/");
   };
@@ -71,8 +81,8 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <Button type="submit" className="bg-primary-500">
-          Post Thread
+        <Button type="submit" className="bg-primary-500 font-mono">
+          {threadId ? "Edit" : "Create"} Post
         </Button>
       </form>
     </Form>
