@@ -70,10 +70,10 @@ function PostThread({ userId, threadId, threadText }: Props) {
           name="thread"
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
-              <FormLabel className="text-base-semibold text-yellow-100">
+              <FormLabel className="text-base-semibold text-light-1">
                 Content
               </FormLabel>
-              <FormControl className="no-focus border border-dark-4 bg-dark-3 text-yellow-100">
+              <FormControl className="no-focus border border-dark-4 bg-dark-3 text-light-1">
                 <Textarea rows={15} {...field} />
               </FormControl>
               <FormMessage />
@@ -81,7 +81,7 @@ function PostThread({ userId, threadId, threadText }: Props) {
           )}
         />
 
-        <Button type="submit" className="bg-primary-500 font-mono">
+        <Button type="submit" className="bg-gray-600 font-mono">
           {threadId ? "Edit" : "Create"} Post
         </Button>
       </form>

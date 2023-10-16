@@ -37,7 +37,7 @@ function ProfileHeader({
           </div>
 
           <div className="flex-1">
-            <h2 className="text-left text-heading3-bold text-yellow-100">
+            <h2 className="text-left text-heading3-bold text-light-1">
               {name}
             </h2>
             <p className="text-base-medium text-gray-1">@{username}</p>
@@ -56,7 +56,7 @@ function ProfileHeader({
                       height={16}
                     />
 
-                    <p className="text-yellow-100 max-sm:hidden">Edit</p>
+                    <p className="text-light-1 max-sm:hidden">Edit</p>
                   </div>
                 </Link>
               ) : (
@@ -71,7 +71,7 @@ function ProfileHeader({
         )}
       </div>
 
-      <p className="mt-6 max-w-lg text-base-regular text-yellow-100">{bio}</p>
+      <p className="mt-6 max-w-lg text-base-regular text-light-1">{bio}</p>
 
       <div className="mt-12 h-0.5 w-full bg-dark-3" />
     </div>

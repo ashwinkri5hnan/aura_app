@@ -36,7 +36,7 @@ const LeftSidebar = () => {
                 height={24}
               />
 
-              <p className=" max-lg:hidden text-yellow-100">{link.label}</p>
+              <p className=" max-lg:hidden text-light-1">{link.label}</p>
             </Link>
           );
         })}

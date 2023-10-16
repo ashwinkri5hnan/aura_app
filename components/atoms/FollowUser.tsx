@@ -28,7 +28,7 @@ const FollowUser = ({ userId, currentUserId, isFollowing = false }: Props) => {
       <div className="flex cursor-pointer gap-3 rounded-lg">
         <Image src="/assets/user.svg" alt="logout" width={16} height={16} />
 
-        <p className="text-yellow-100 max-sm:hidden">
+        <p className="text-light-1 max-sm:hidden">
           {isFollowing ? "Unfollow" : "Follow"}
         </p>
       </div>
