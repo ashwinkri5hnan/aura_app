@@ -53,17 +53,17 @@ async function Page({ params }: { params: { id: string } }) {
                 />
                 <p className="max-sm:hidden">{tab.label}</p>
                 {tab.label === "Threads" && (
-                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
+                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-yellow-100">
                     {userInfo.threadsCount}
                   </p>
                 )}
                 {tab.label === "Followers" && (
-                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
+                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-yellow-100">
                     {userInfo.followersCount}
                   </p>
                 )}
                 {tab.label === "Following" && (
-                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
+                  <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-yellow-100">
                     {userInfo.followingCount}
                   </p>
                 )}
@@ -71,11 +71,11 @@ async function Page({ params }: { params: { id: string } }) {
             ))}
           </TabsList>
 
-          <TabsContent value="threads" className="w-full text-light-1">
+          <TabsContent value="threads" className="w-full text-yellow-100">
             {/* @ts-ignore */}{" "}
             {userInfo.threadsCount === 0 ? (
               <div className="mt-9 flex flex-col gap-10">
-                <p className="no-result">No threads found</p>
+                <p className="no-result">No Posts found :(</p>
               </div>
             ) : (
               <ThreadsTab
@@ -86,7 +86,7 @@ async function Page({ params }: { params: { id: string } }) {
             )}
           </TabsContent>
 
-          <TabsContent value="followers" className="w-full text-light-1">
+          <TabsContent value="followers" className="w-full text-yellow-100">
             <div className="mt-9 flex flex-col gap-10">
               {userInfo.followersCount === 0 ? (
                 <p className="no-result">No users found</p>
@@ -107,7 +107,7 @@ async function Page({ params }: { params: { id: string } }) {
             </div>
           </TabsContent>
 
-          <TabsContent value="following" className="w-full text-light-1">
+          <TabsContent value="following" className="w-full text-yellow-100">
             <div className="mt-9 flex flex-col gap-10">
               {userInfo.followingCount === 0 ? (
                 <p className="no-result">No users found</p>

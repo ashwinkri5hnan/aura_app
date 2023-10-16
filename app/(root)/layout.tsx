@@ -32,7 +32,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Topbar />
 
-          <main className="flex flex-row font-mono text-yellow-200">
+          <main className="flex flex-row font-mono ">
             <LeftSidebar />
             <section className="main-container">
               <div className="w-full max-w-4xl">{children}</div>

@@ -58,7 +58,7 @@ async function Page() {
 }
 
 const ActivityComponent = ({ author, createdAt, activityType, text }: any) => (
-  <p className="!text-small-regular text-light-1">
+  <p className="!text-small-regular text-yellow-100">
     <Link key={author._id} href={`/profile/${author.id}`}>
       <span className="text-primary-500">{author.name}</span>
     </Link>{" "}
