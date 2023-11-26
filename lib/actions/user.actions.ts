@@ -306,12 +306,13 @@ export async function getActivity(userId: string) {
         });
 
         const followersData = user.followers.map(
-            (follower: { user: { toString: () => any }; createdAt: any }) => {
+            (follower: { user: { toString: () => any; }; createdAt: any; }) => {
                 const followingUser = followersUsers.find(
                     (user) => user._id.toString() === follower.user.toString()
                 );
 
-                if (followingUser._id.equals(userId)) return null;
+                if (!followingUser || followingUser._id.equals(userId)) return null;
+
                 return {
                     author: {
                         name: followingUser.name,
@@ -324,6 +325,7 @@ export async function getActivity(userId: string) {
                     activityType: "follow",
                 };
             }
+
         );
 
         const [replies, reactionsAndFollowers] = await Promise.all([
