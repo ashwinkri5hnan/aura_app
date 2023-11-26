@@ -60,14 +60,14 @@ async function Page() {
 const ActivityComponent = ({ author, createdAt, activityType, text }: any) => (
   <p className="!text-small-regular text-light-1">
     <Link key={author._id} href={`/profile/${author.id}`}>
-      <span className="text-primary-500">{author.name}</span>
+      <span className="text-red-300">{author.name}</span>
     </Link>{" "}
     <>
       {activityType === "follow" && "followed you"}
       {activityType === "reaction" && "like your thread"}
       {text && `replied to your thread: "${truncateString(text, 100)}"`}
     </>{" "}
-    <span className="text-dark-1">~ {formatDateWithMeasure(createdAt)}</span>
+    <span className="text-gray-600">~ {formatDateWithMeasure(createdAt)}</span>
   </p>
 );
 

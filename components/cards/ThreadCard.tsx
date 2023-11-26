@@ -56,7 +56,7 @@ function ThreadCard({
       className={`flex w-full flex-col rounded-xl ${
         isComment
           ? "px-0 xs:px-7"
-          : "bg-purple-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0  p-7"
+          : "bg-purple-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0  p-7 border border-red-300 border-x-red-400"
       }`}
     >
       <div className="flex items-start justify-between">
