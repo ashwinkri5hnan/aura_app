@@ -40,7 +40,7 @@ function ProfileHeader({
             <h2 className="text-left text-heading3-bold text-light-1">
               {name}
             </h2>
-            <p className="text-base-medium text-dark-1">@{username}</p>
+            <p className="text-base-medium text-red-300">@{username}</p>
           </div>
         </div>
         {type !== "Community" && (
