@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import {} from "../ui/button";
+import { Button } from "../ui/button";
 import { followUser } from "@/lib/actions/user.actions";
 import { usePathname } from "next/navigation";
 
