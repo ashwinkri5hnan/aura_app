@@ -290,19 +290,24 @@ export async function getActivity(userId: string) {
                 (user) => user._id.toString() === reaction.user.toString()
             );
 
-            if (reactingUser._id.equals(userId)) return null;
+            if (reactingUser && reactingUser._id && reactingUser._id.equals && typeof reactingUser._id.equals === 'function' && reactingUser._id.equals(userId)) {
+                return null;
+            }
+
+
             return {
                 author: {
-                    name: reactingUser.name,
-                    username: reactingUser.username,
-                    image: reactingUser.image,
-                    _id: reactingUser._id,
-                    id: reactingUser.id,
+                    name: reactingUser && reactingUser.name,
+                    username: reactingUser && reactingUser.username,
+                    image: reactingUser && reactingUser.image,
+                    _id: reactingUser && reactingUser._id,
+                    id: reactingUser && reactingUser.id,
                 },
-                createdAt: reaction.createdAt,
-                parentId: userThreads[0]._id.toString(),
+                createdAt: reaction && reaction.createdAt,
+                parentId: userThreads && userThreads[0] && userThreads[0]._id && userThreads[0]._id.toString(),
                 activityType: "reaction",
             };
+
         });
 
         const followersData = user.followers.map(

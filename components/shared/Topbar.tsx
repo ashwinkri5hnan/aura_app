@@ -6,11 +6,14 @@ import { dark } from "@clerk/themes";
 
 function Topbar() {
   return (
-    <nav className="topbar">
+    <nav
+      className="topbar  bg-purple-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 
+    "
+    >
       <Link href="/" className="flex items-center gap-4">
         <Image src="/assets/logo.svg" alt="logo" width={28} height={28} />
-        <p className="text-heading3-bold text-light-1 max-xs:hidden font-mono">
-          Aura
+        <p className="text-heading3-bold text-yellow-300 max-xs:hidden font-mono">
+          skid row
         </p>
       </Link>
       <div className="flex items-center gap-1">

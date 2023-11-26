@@ -67,7 +67,7 @@ const ActivityComponent = ({ author, createdAt, activityType, text }: any) => (
       {activityType === "reaction" && "like your thread"}
       {text && `replied to your thread: "${truncateString(text, 100)}"`}
     </>{" "}
-    <span className="text-gray-1">~ {formatDateWithMeasure(createdAt)}</span>
+    <span className="text-dark-1">~ {formatDateWithMeasure(createdAt)}</span>
   </p>
 );
 

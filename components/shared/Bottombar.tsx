@@ -21,7 +21,10 @@ function Bottombar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`bottombar_link ${isActive && "bg-gray-600"}`}
+              className={`bottombar_link ${
+                isActive &&
+                "bg-purple-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-yellow-300"
+              }`}
             >
               <Image
                 src={link.imgURL}

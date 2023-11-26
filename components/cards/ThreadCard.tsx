@@ -54,7 +54,9 @@ function ThreadCard({
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
-        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+        isComment
+          ? "px-0 xs:px-7"
+          : "bg-purple-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-yellow-300 p-7"
       }`}
     >
       <div className="flex items-start justify-between">
@@ -79,7 +81,7 @@ function ThreadCard({
               </h4>
             </Link>
 
-            <p className="mt-2 text-small-regular text-orange-200">{content}</p>
+            <p className="mt-2 text-small-regular text-light-1">{content}</p>
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">
@@ -120,7 +122,7 @@ function ThreadCard({
                   <>
                     {comments.length > 0 && (
                       <Link href={`/thread/${id}`}>
-                        <p className="mt-1 text-subtle-medium text-gray-1">
+                        <p className="mt-1 text-subtle-medium text-dark-1">
                           {comments.length}{" "}
                           {comments.length > 1 ? "replies" : "reply"}
                         </p>
@@ -128,12 +130,12 @@ function ThreadCard({
                     )}
 
                     {comments.length > 0 && reactions.length > 0 && (
-                      <p className="mt-1 text-subtle-medium text-gray-1">•</p>
+                      <p className="mt-1 text-subtle-medium text-dark-1">•</p>
                     )}
 
                     {reactions.length > 0 && (
                       <Link href={`/thread/reactions/${id}`}>
-                        <p className="mt-1 text-subtle-medium text-gray-1">
+                        <p className="mt-1 text-subtle-medium text-dark-1">
                           {reactions.length}{" "}
                           {reactions.length > 1 ? "likes" : "like"}
                         </p>
@@ -181,7 +183,7 @@ function ThreadCard({
                 ))}
 
                 <Link href={`/thread/${id}`}>
-                  <p className="mt-1 text-subtle-medium text-gray-1">
+                  <p className="mt-1 text-subtle-medium text-green-200">
                     {comments.length}{" "}
                     {comments.length > 1 ? "replies" : "reply"}
                   </p>
@@ -191,7 +193,7 @@ function ThreadCard({
 
             {/* {comments.length > 0 && reactions.length > 0 && (
               <div className="ml-1 mt-3 flex items-center">
-                <p className="mt-1 text-subtle-medium text-gray-1">•</p>
+                <p className="mt-1 text-subtle-medium text-dark-1">•</p>
               </div>
             )} */}
 
@@ -211,7 +213,7 @@ function ThreadCard({
                 ))}
 
                 <Link href={`/thread/reactions/${id}`}>
-                  <p className="mt-1 text-subtle-medium text-gray-1">
+                  <p className="mt-1 text-subtle-medium text-green-200">
                     {reactions.length} {reactions.length > 1 ? "likes" : "like"}
                   </p>
                 </Link>
@@ -226,7 +228,7 @@ function ThreadCard({
           href={`/communities/${community.id}`}
           className="mt-5 flex items-center"
         >
-          <p className="text-subtle-medium text-gray-1">
+          <p className="text-subtle-medium text-green-200">
             {formatDateString(createdAt)}
             {community && ` - ${community.name} Community`}
           </p>
