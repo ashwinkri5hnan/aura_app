@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 
 export const metadata = {
-  title: "skid row",
+  title: "shade",
   description: "A Next.js 13 Meta threads application",
 };
 
