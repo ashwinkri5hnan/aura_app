@@ -13,8 +13,8 @@ import Topbar from "@/components/shared/Topbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "shade",
-  description: "A Next.js 13 Meta shade application",
+  title: "aura",
+  description: "A Next.js 13 Meta aura application",
 };
 
 export default function RootLayout({
